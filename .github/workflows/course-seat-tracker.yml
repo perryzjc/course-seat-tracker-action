@@ -1,0 +1,57 @@
+name: Notify if a seat is available in a course
+
+# Triggers for the GitHub Action workflow
+on:
+  # Trigger the workflow on pushes to the main branch
+  push:
+    branches:
+      - main
+  # Schedule the workflow to run every 5 minutes
+  schedule:
+    - cron: '*/5 * * * *'
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+
+jobs:
+  # Define the job for checking course seat availability
+  check-seat:
+    # Specify the type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the repository to access the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup the Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Cache the installed Python packages to speed up the workflow
+      - name: Cache Python packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+          # Use the OS and requirements.txt file's hash to create a unique cache key
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # Fallback cache keys to restore cache in case of a cache miss
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            
+      # Install Python dependencies from requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Run the script to check for seat availability
+      - name: Check seat availability
+        run: python script.py
+        id: check-seat
+
+      # Note that if sucess, then it should be no seat available!
+      # It only notifies when the Action fails.
+      - name: Notify on No Seat Availability
+        if: success()
+        run: echo "No seat is available."
