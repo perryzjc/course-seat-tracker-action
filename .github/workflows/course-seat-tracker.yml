@@ -47,7 +47,7 @@ jobs:
 
       # Run the script to check for seat availability
       - name: Check seat availability
-        run: python script.py
+        run: python main.py
         id: check-seat
 
       # Note that if sucess, then it should be no seat available!
