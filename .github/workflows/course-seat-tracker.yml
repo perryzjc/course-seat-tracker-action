@@ -14,7 +14,7 @@ on:
 
 jobs:
   # Define the job for checking course seat availability
-  check-seat:
+  course-seat-tracker:
     # Specify the type of runner that the job will run on
     runs-on: ubuntu-latest
     
@@ -52,6 +52,6 @@ jobs:
 
       # Note that if sucess, then it should be no seat available!
       # It only notifies when the Action fails.
-      - name: Notify on No Seat Availability
+      - name: No Email for No Seat Availability
         if: success()
         run: echo "No seat is available."
