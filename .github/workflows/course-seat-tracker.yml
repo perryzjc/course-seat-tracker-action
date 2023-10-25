@@ -1,57 +1,39 @@
-name: Notify if a seat is available in a course
+name: Dynamic Status in Email
 
-# Triggers for the GitHub Action workflow
 on:
-  # Trigger the workflow on pushes to the main branch
   push:
     branches:
       - main
-  # Schedule the workflow to run every 5 minutes
-  schedule:
-    - cron: '*/5 * * * *'
-  # Allow manual triggering of the workflow
-  workflow_dispatch:
+      - exp
+      - dev
 
 jobs:
-  # Define the job for checking course seat availability
-  course-seat-tracker:
-    # Specify the type of runner that the job will run on
+  build:
     runs-on: ubuntu-latest
     
     steps:
-      # Checkout the repository to access the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      # Setup the Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+      - name: Run Python script
+        id: script
+        run: |
+          echo "Running Python script to generate dynamic status..."
+          echo "::set-output name=status::$(python3 -c 'print(\"Dynamic Status from Python\")')"
 
-      # Cache the installed Python packages to speed up the workflow
-      - name: Cache Python packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/pip
-          # Use the OS and requirements.txt file's hash to create a unique cache key
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          # Fallback cache keys to restore cache in case of a cache miss
-          restore-keys: |
-            ${{ runner.os }}-pip-
-            
-      # Install Python dependencies from requirements.txt
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Run main job
+        run: |
+          echo "Running main job"
+          (exit 1) # Simulating a command failure
 
-      # Run the script to check for seat availability
-      - name: Check seat availability
-        run: python main.py
-        id: check-seat
-
-      # Note that if sucess, then it should be no seat available!
-      # It only notifies when the Action fails.
-      - name: No Email for No Seat Availability
-        if: success()
-        run: echo "No seat is available."
+      - name: Set failed status
+        if: failure()
+        run: |
+          echo "::set-output name=failed::true"
+        id: failed_status
+    
+      - name: Print dynamic action name
+        if: steps.failed_status.outputs.failed == 'true'
+        env:
+          STATUS: ${{ steps.script.outputs.status }}
+        run: echo "Action failed with status - $STATUS"
