@@ -19,6 +19,7 @@ class BaseCourse:
 
     def check_availability(self):
         html = self.get_html()
+        print(f"HTML: {html}")
         available, message = self.parse_html(html)
         if available:
             print(f"{self.__class__.__name__} is available! {message}")

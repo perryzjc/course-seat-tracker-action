@@ -2,7 +2,7 @@ import sys
 import importlib
 
 COURSE_TO_DETECT = [
-    'CS168',
+    'ECC_CS8',
 ]
 
 def check_course_availability(course_name):
@@ -16,7 +16,7 @@ def check_course_availability(course_name):
     if course_class is None:
         print(f"Course class for {course_name} not found in the module.")
         return None
-
+    
     course = course_class()
     return course.check_availability()
 
