@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - "ecc-cs8"
   # Schedule the workflow to run every 5 minutes
   schedule:
     - cron: '*/5 * * * *'
