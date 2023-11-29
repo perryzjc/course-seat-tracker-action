@@ -36,14 +36,10 @@ class ECC_CS8(BaseCourse):
             # sys.exit(1)
 
     def parse_html(self, data_json):
-        try:
-            data = json.loads(data_json)
-            availability_display = data.get("AvailabilityDisplay", "")
-            waitlist_number = availability_display.split('/')[-1].strip()
-            max_waitlist = 10
-            available = max_waitlist - int(waitlist_number) > 0
-            message = f"{waitlist_number} out of {max_waitlist} spots are waitlisted."
-            return available, message
-        except Exception as e:
-            print(f"Failed to parse JSON: {e}")
-            # sys.exit(1)
+        data = json.loads(data_json)
+        availability_display = data.get("AvailabilityDisplay", "")
+        waitlist_number = availability_display.split('/')[-1].strip()
+        max_waitlist = 10
+        available = max_waitlist - int(waitlist_number) > 0
+        message = f"{waitlist_number} out of {max_waitlist} spots are waitlisted."
+        return available, message
