@@ -44,6 +44,6 @@ class ECC_CS8(BaseCourse):
             available = max_waitlist - int(waitlist_number) > 0
             message = f"{waitlist_number} out of {max_waitlist} spots are waitlisted."
             return available, message
-        except json.JSONDecodeError as e:
+        except Exception as e:
             print(f"Failed to parse JSON: {e}")
             # sys.exit(1)
