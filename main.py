@@ -2,7 +2,7 @@ import sys
 import importlib
 
 COURSE_TO_DETECT = [
-    'ECC_CS8',
+    'INDENG_172',
 ]
 
 def check_course_availability(course_name):
