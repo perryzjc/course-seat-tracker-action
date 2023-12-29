@@ -3,9 +3,9 @@ import json
 import sys
 from courses.base_course import BaseCourse
 
-class INDENG_172(BaseCourse):
+class DATA_172(BaseCourse):
     def __init__(self):
-        super().__init__("https://classes.berkeley.edu/content/2024-spring-indeng-172-1-lec-1")
+        super().__init__("https://classes.berkeley.edu/content/2024-spring-data-c140-001-lec-001")
 
     def parse_html(self, html):
         soup = BeautifulSoup(html, 'html.parser')
@@ -21,7 +21,7 @@ class INDENG_172(BaseCourse):
             data = json.loads(data_json)
             waitlisted = data.get('available', {}).get('enrollmentStatus', {}).get('waitlistedCount', 0)
             max_waitlist = data.get('available', {}).get('enrollmentStatus', {}).get('maxWaitlist', 0)
-            available = max_waitlist - waitlisted > 1
+            available = max_waitlist - waitlisted > 0
             message = f"{waitlisted} out of {max_waitlist} spots are taken."
             return available, message
         except json.JSONDecodeError as e:
