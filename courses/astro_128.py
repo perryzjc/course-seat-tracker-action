@@ -3,7 +3,7 @@ import json
 import sys
 from courses.base_course import BaseCourse
 
-class ASTRO_120(BaseCourse):
+class ASTRO_128(BaseCourse):
     def __init__(self):
         super().__init__("https://classes.berkeley.edu/content/2024-spring-astron-128-001-lab-001")
 
