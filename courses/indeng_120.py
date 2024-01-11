@@ -21,7 +21,7 @@ class INDENG_120(BaseCourse):
             data = json.loads(data_json)
             waitlisted = data.get('available', {}).get('enrollmentStatus', {}).get('waitlistedCount', 0)
             max_waitlist = data.get('available', {}).get('enrollmentStatus', {}).get('maxWaitlist', 0)
-            available = max_waitlist - waitlisted > 0
+            available = max_waitlist - waitlisted > 2
             message = f"{waitlisted} out of {max_waitlist} spots are taken."
             return available, message
         except json.JSONDecodeError as e:
