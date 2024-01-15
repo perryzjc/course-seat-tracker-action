@@ -4,7 +4,7 @@ import importlib
 COURSE_TO_DETECT = [
     'ENGIN_183D',
     'INDENG_120',
-    'ASTRO_128',
+    'CS160',
 ]
 
 def check_course_availability(course_name):
