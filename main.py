@@ -2,7 +2,7 @@ import sys
 import importlib
 
 COURSE_TO_DETECT = [
-    'ENGIN_183D',
+    # 'ENGIN_183D',
     'INDENG_120',
     'CS160',
 ]
