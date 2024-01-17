@@ -20,7 +20,7 @@ class ENGIN_183D(BaseCourse):
         try:
             data = json.loads(data_json)
             enrolled = data.get('available', {}).get('enrollmentStatus', {}).get('enrolledCount', 0)
-            available = enrolled > 58
+            available = enrolled > 59
             message = f"{enrolled} enrolled out of 60 spots"
             return available, message
         except json.JSONDecodeError as e:
