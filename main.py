@@ -3,8 +3,8 @@ import importlib
 
 COURSE_TO_DETECT = [
     # 'ENGIN_183D',
-    'INDENG_120',
-    # 'CS160',
+    # 'INDENG_120',
+    'BIOENG 100',
 ]
 
 def check_course_availability(course_name):
