@@ -3,7 +3,7 @@ import importlib
 
 COURSE_TO_DETECT = [
     # 'ENGIN_183D',
-    # 'INDENG_120',
+    'INDENG_120',
     'BIOENG_100',
 ]
 
