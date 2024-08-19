@@ -5,7 +5,7 @@ from courses.base_course import BaseCourse
 
 class INDENG_120(BaseCourse):
     def __init__(self):
-        super().__init__("https://classes.berkeley.edu/content/2024-spring-indeng-120-1-lec-1")
+        super().__init__("https://classes.berkeley.edu/content/2024-fall-indeng-120-1-lec-1")
 
     def parse_html(self, html):
         soup = BeautifulSoup(html, 'html.parser')
@@ -22,7 +22,7 @@ class INDENG_120(BaseCourse):
             waitlisted = data.get('available', {}).get('enrollmentStatus', {}).get('waitlistedCount', 0)
             max_waitlist = data.get('available', {}).get('enrollmentStatus', {}).get('maxWaitlist', 0)
             available = max_waitlist - waitlisted > 0
-            message = f"{waitlisted} out of {max_waitlist} spots are taken."
+            message = f"{waitlisted} out of {max_waitlist} waitlist spots are taken."
             return available, message
         except json.JSONDecodeError as e:
             print(f"Failed to parse JSON: {e}")
