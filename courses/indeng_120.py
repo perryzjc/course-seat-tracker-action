@@ -5,7 +5,7 @@ from courses.base_course import BaseCourse
 
 class INDENG_120(BaseCourse):
     def __init__(self):
-        super().__init__("https://classes.berkeley.edu/content/2024-fall-indeng-120-1-dis-102")
+        super().__init__("https://classes.berkeley.edu/content/2024-fall-indeng-120-1-lec-1")
 
     def parse_html(self, html):
         soup = BeautifulSoup(html, 'html.parser')
